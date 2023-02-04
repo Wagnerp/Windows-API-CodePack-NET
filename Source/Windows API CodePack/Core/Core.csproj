@@ -21,8 +21,7 @@
 		<Title>WindowsAPICodePackCore</Title>
 		<PackageVersion>7.0.2</PackageVersion>
 
-		<Description>
-			This package contains the core binary for the Windows API Code Pack needed for Windows Forms Development in the 1.1 version, released by Microsoft in 2009.
+		<Description>	This package contains the core binary for the Windows API Code Pack needed for Windows Forms Development in the 1.1 version, released by Microsoft in 2009.
 		</Description>
 
 		<PackageLicenseFile>License.md</PackageLicenseFile>

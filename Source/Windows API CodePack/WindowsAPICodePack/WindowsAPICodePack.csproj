@@ -1,0 +1,142 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net462;net47;net471;net472;net48;net481;netcoreapp3.1;net5.0-windows;net6.0-windows;net7.0-windows</TargetFrameworks>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<OutputType>Library</OutputType>
+		<RootNamespace>Microsoft.WindowsAPICodePack.Core</RootNamespace>
+		<AssemblyName>Microsoft.WindowsAPICodePack.Core</AssemblyName>
+		<UseWindowsForms>True</UseWindowsForms>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<AutoGenerateBindingRedirects>True</AutoGenerateBindingRedirects>
+		<LangVersion>latest</LangVersion>
+		<LibraryVersion>7.0.2</LibraryVersion>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<Title>WindowsAPICodePack</Title>
+		<PackageVersion>7.0.2</PackageVersion>
+
+		<Description>
+			This package contains all the binaries for the Windows API Code Pack needed for Windows Forms Development in the 1.1 version, released by Microsoft in 2009.
+		</Description>
+
+
+		<PackageLicenseFile>License.md</PackageLicenseFile>
+
+
+		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+
+
+		<PackageIcon>Windows.png</PackageIcon>
+
+
+		<PackageProjectUrl>https://github.com/Wagnerp/Windows-API-CodePack-NET</PackageProjectUrl>
+
+		<RepositoryUrl>git</RepositoryUrl>
+
+		<Authors>$(Title)</Authors>
+
+		<PackageId>$(Title)</PackageId>
+
+		<!--<BaseOutputPath>..\..\..\bin</BaseOutputPath>
+
+		<BaseIntermediateOutputPath>..\..\..\obj\</BaseIntermediateOutputPath>-->
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.NETCore.Platforms" Version="7.0.0" />
+		<PackageReference Include="System.Net.Http" Version="4.3.4" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Remove="Shell\Controls\CommandLinkWPF.xaml" />
+		<None Remove="Shell\ExplorerBrowser\ExplorerBrowser.WPF.xaml" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Update="Core\Resources\LocalizedMessages.Designer.cs">
+			<DependentUpon>LocalizedMessages.resx</DependentUpon>
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+		</Compile>
+		<Compile Update="ExtendedLinguisticServices\Resources\LocalizedMessages.Designer.cs">
+			<DependentUpon>LocalizedMessages.resx</DependentUpon>
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+		</Compile>
+		<Compile Update="Sensors\Resources\LocalizedMessages.Designer.cs">
+			<DependentUpon>LocalizedMessages.resx</DependentUpon>
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+		</Compile>
+		<Compile Update="ShellExtensions\Resources\LocalizedMessages.Designer.cs">
+			<DependentUpon>LocalizedMessages.resx</DependentUpon>
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+		</Compile>
+		<Compile Update="Shell\Controls\CommandLinkWinforms.cs">
+			<SubType>Component</SubType>
+		</Compile>
+		<Compile Update="Shell\DesktopWindowManager\GlassForm.cs">
+			<SubType>Form</SubType>
+		</Compile>
+		<Compile Update="Shell\ExplorerBrowser\ExplorerBrowser.cs">
+			<SubType>UserControl</SubType>
+		</Compile>
+		<Compile Update="Shell\Resources\LocalizedMessages.Designer.cs">
+			<DependentUpon>LocalizedMessages.resx</DependentUpon>
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+		</Compile>
+		<Compile Update="Shell\Taskbar\TabbedThumbnailProxyWindow.cs">
+			<SubType>Form</SubType>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Update="Core\Resources\LocalizedMessages.resx">
+			<LastGenOutput>LocalizedMessages.Designer.cs</LastGenOutput>
+			<Generator>ResXFileCodeGenerator</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="ExtendedLinguisticServices\Resources\LocalizedMessages.resx">
+			<LastGenOutput>LocalizedMessages.Designer.cs</LastGenOutput>
+			<Generator>ResXFileCodeGenerator</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Sensors\Resources\LocalizedMessages.resx">
+			<LastGenOutput>LocalizedMessages.Designer.cs</LastGenOutput>
+			<Generator>ResXFileCodeGenerator</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="ShellExtensions\Resources\LocalizedMessages.resx">
+			<LastGenOutput>LocalizedMessages.Designer.cs</LastGenOutput>
+			<Generator>ResXFileCodeGenerator</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Shell\Resources\LocalizedMessages.resx">
+			<LastGenOutput>LocalizedMessages.Designer.cs</LastGenOutput>
+			<Generator>ResXFileCodeGenerator</Generator>
+		</EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Page Include="Shell\Controls\CommandLinkWPF.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</Page>
+		<Page Include="Shell\ExplorerBrowser\ExplorerBrowser.WPF.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</Page>
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="../../../Assets/Documents/Licenses/License.md">
+			<PackagePath>\</PackagePath>
+		</None>
+		<None Update="../../../Assets/Icon/PNG/Windows.png">
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+
+</Project>

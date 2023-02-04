@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>WindowsAPICodePack</id>
+    <version>7.0.2</version>
+    <title>WindowsAPICodePack</title>
+    <authors>Microsoft Corporation,Jacob Slusser,Peter William Wagner (aka Wagnerp)</authors>
+    <owners></owners>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <license type="file">License.md</license>
+    <icon>Windows.png</icon>
+    <projectUrl>https://github.com/Wagnerp/Windows-API-CodePack-NET</projectUrl>
+    <description>This package contains all the binaries for the Windows API Code Pack needed for Windows Forms Development in the 1.1 version, released by Microsoft in 2009.
+		 
+
+			Modifications by Jacob Slusser until 2020. Modified to use .NET Frameworks 4.6.2 - 4.8.1, .NET Core 3.1 or .NET 5 - 7 and refactoring by Peter William Wagner, (aka Wagnerp) 2023.</description>
+    <dependencies>
+      <group targetFramework=".NETFramework4.6.2">
+        <dependency id="Microsoft.NETCore.Platforms" version="7.0.0" exclude="Build,Analyzers" />
+        <dependency id="System.Net.Http" version="4.3.4" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework=".NETFramework4.7">
+        <dependency id="Microsoft.NETCore.Platforms" version="7.0.0" exclude="Build,Analyzers" />
+        <dependency id="System.Net.Http" version="4.3.4" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework=".NETFramework4.7.1">
+        <dependency id="Microsoft.NETCore.Platforms" version="7.0.0" exclude="Build,Analyzers" />
+        <dependency id="System.Net.Http" version="4.3.4" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework=".NETFramework4.7.2">
+        <dependency id="Microsoft.NETCore.Platforms" version="7.0.0" exclude="Build,Analyzers" />
+        <dependency id="System.Net.Http" version="4.3.4" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework=".NETFramework4.8">
+        <dependency id="Microsoft.NETCore.Platforms" version="7.0.0" exclude="Build,Analyzers" />
+        <dependency id="System.Net.Http" version="4.3.4" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework=".NETFramework4.8.1">
+        <dependency id="Microsoft.NETCore.Platforms" version="7.0.0" exclude="Build,Analyzers" />
+        <dependency id="System.Net.Http" version="4.3.4" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework=".NETCoreApp3.1">
+        <dependency id="Microsoft.NETCore.Platforms" version="7.0.0" exclude="Build,Analyzers" />
+        <dependency id="System.Net.Http" version="4.3.4" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework="net5.0-windows7.0">
+        <dependency id="Microsoft.NETCore.Platforms" version="7.0.0" exclude="Build,Analyzers" />
+        <dependency id="System.Net.Http" version="4.3.4" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework="net6.0-windows7.0">
+        <dependency id="Microsoft.NETCore.Platforms" version="7.0.0" exclude="Build,Analyzers" />
+        <dependency id="System.Net.Http" version="4.3.4" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework="net7.0-windows7.0">
+        <dependency id="Microsoft.NETCore.Platforms" version="7.0.0" exclude="Build,Analyzers" />
+        <dependency id="System.Net.Http" version="4.3.4" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+    <frameworkReferences>
+      <group targetFramework=".NETCoreApp3.1">
+        <frameworkReference name="Microsoft.WindowsDesktop.App.WindowsForms" />
+      </group>
+      <group targetFramework="net5.0-windows7.0">
+        <frameworkReference name="Microsoft.WindowsDesktop.App.WindowsForms" />
+      </group>
+      <group targetFramework="net6.0-windows7.0">
+        <frameworkReference name="Microsoft.WindowsDesktop.App.WindowsForms" />
+      </group>
+      <group targetFramework="net7.0-windows7.0">
+        <frameworkReference name="Microsoft.WindowsDesktop.App.WindowsForms" />
+      </group>
+      <group targetFramework=".NETFramework4.6.2" />
+      <group targetFramework=".NETFramework4.7" />
+      <group targetFramework=".NETFramework4.7.1" />
+      <group targetFramework=".NETFramework4.7.2" />
+      <group targetFramework=".NETFramework4.8" />
+      <group targetFramework=".NETFramework4.8.1" />
+    </frameworkReferences>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="System.IO" targetFramework=".NETFramework4.7.10" />
+      <frameworkAssembly assemblyName="System.Runtime" targetFramework=".NETFramework4.7.10" />
+      <frameworkAssembly assemblyName="System.Security.Cryptography.Algorithms" targetFramework=".NETFramework4.7.10" />
+      <frameworkAssembly assemblyName="System.Security.Cryptography.Encoding" targetFramework=".NETFramework4.7.10" />
+      <frameworkAssembly assemblyName="System.Security.Cryptography.Primitives" targetFramework=".NETFramework4.7.10" />
+      <frameworkAssembly assemblyName="System.Security.Cryptography.X509Certificates" targetFramework=".NETFramework4.7.10" />
+      <frameworkAssembly assemblyName="System.Net.Http" targetFramework=".NETFramework4.7.20" />
+    </frameworkAssemblies>
+  </metadata>
+  <files>
+    <file src="lib\net462\Microsoft.WindowsAPICodePack.Core.dll" target="lib\net462\Microsoft.WindowsAPICodePack.Core.dll" />
+    <file src="lib\net462\Microsoft.WindowsAPICodePack.ExtendedLinguisticServices.dll" target="lib\net462\Microsoft.WindowsAPICodePack.ExtendedLinguisticServices.dll" />
+    <file src="lib\net462\Microsoft.WindowsAPICodePack.Sensors.dll" target="lib\net462\Microsoft.WindowsAPICodePack.Sensors.dll" />
+    <file src="lib\net462\Microsoft.WindowsAPICodePack.Shell.dll" target="lib\net462\Microsoft.WindowsAPICodePack.Shell.dll" />
+    <file src="lib\net462\Microsoft.WindowsAPICodePack.ShellExtensions.dll" target="lib\net462\Microsoft.WindowsAPICodePack.ShellExtensions.dll" />
+    <file src="lib\net47\Microsoft.WindowsAPICodePack.Core.dll" target="lib\net47\Microsoft.WindowsAPICodePack.Core.dll" />
+    <file src="lib\net47\Microsoft.WindowsAPICodePack.ExtendedLinguisticServices.dll" target="lib\net47\Microsoft.WindowsAPICodePack.ExtendedLinguisticServices.dll" />
+    <file src="lib\net47\Microsoft.WindowsAPICodePack.Sensors.dll" target="lib\net47\Microsoft.WindowsAPICodePack.Sensors.dll" />
+    <file src="lib\net47\Microsoft.WindowsAPICodePack.Shell.dll" target="lib\net47\Microsoft.WindowsAPICodePack.Shell.dll" />
+    <file src="lib\net47\Microsoft.WindowsAPICodePack.ShellExtensions.dll" target="lib\net47\Microsoft.WindowsAPICodePack.ShellExtensions.dll" />
+    <file src="lib\net471\Microsoft.WindowsAPICodePack.Core.dll" target="lib\net471\Microsoft.WindowsAPICodePack.Core.dll" />
+    <file src="lib\net471\Microsoft.WindowsAPICodePack.ExtendedLinguisticServices.dll" target="lib\net471\Microsoft.WindowsAPICodePack.ExtendedLinguisticServices.dll" />
+    <file src="lib\net471\Microsoft.WindowsAPICodePack.Sensors.dll" target="lib\net471\Microsoft.WindowsAPICodePack.Sensors.dll" />
+    <file src="lib\net471\Microsoft.WindowsAPICodePack.Shell.dll" target="lib\net471\Microsoft.WindowsAPICodePack.Shell.dll" />
+    <file src="lib\net471\Microsoft.WindowsAPICodePack.ShellExtensions.dll" target="lib\net471\Microsoft.WindowsAPICodePack.ShellExtensions.dll" />
+    <file src="lib\net472\Microsoft.WindowsAPICodePack.Core.dll" target="lib\net472\Microsoft.WindowsAPICodePack.Core.dll" />
+    <file src="lib\net472\Microsoft.WindowsAPICodePack.ExtendedLinguisticServices.dll" target="lib\net472\Microsoft.WindowsAPICodePack.ExtendedLinguisticServices.dll" />
+    <file src="lib\net472\Microsoft.WindowsAPICodePack.Sensors.dll" target="lib\net472\Microsoft.WindowsAPICodePack.Sensors.dll" />
+    <file src="lib\net472\Microsoft.WindowsAPICodePack.Shell.dll" target="lib\net472\Microsoft.WindowsAPICodePack.Shell.dll" />
+    <file src="lib\net472\Microsoft.WindowsAPICodePack.ShellExtensions.dll" target="lib\net472\Microsoft.WindowsAPICodePack.ShellExtensions.dll" />
+    <file src="lib\net48\Microsoft.WindowsAPICodePack.Core.dll" target="lib\net48\Microsoft.WindowsAPICodePack.Core.dll" />
+    <file src="lib\net48\Microsoft.WindowsAPICodePack.ExtendedLinguisticServices.dll" target="lib\net48\Microsoft.WindowsAPICodePack.ExtendedLinguisticServices.dll" />
+    <file src="lib\net48\Microsoft.WindowsAPICodePack.Sensors.dll" target="lib\net48\Microsoft.WindowsAPICodePack.Sensors.dll" />
+    <file src="lib\net48\Microsoft.WindowsAPICodePack.Shell.dll" target="lib\net48\Microsoft.WindowsAPICodePack.Shell.dll" />
+    <file src="lib\net48\Microsoft.WindowsAPICodePack.ShellExtensions.dll" target="lib\net48\Microsoft.WindowsAPICodePack.ShellExtensions.dll" />
+    <file src="lib\net481\Microsoft.WindowsAPICodePack.Core.dll" target="lib\net481\Microsoft.WindowsAPICodePack.Core.dll" />
+    <file src="lib\net481\Microsoft.WindowsAPICodePack.ExtendedLinguisticServices.dll" target="lib\net481\Microsoft.WindowsAPICodePack.ExtendedLinguisticServices.dll" />
+    <file src="lib\net481\Microsoft.WindowsAPICodePack.Sensors.dll" target="lib\net481\Microsoft.WindowsAPICodePack.Sensors.dll" />
+    <file src="lib\net481\Microsoft.WindowsAPICodePack.Shell.dll" target="lib\net481\Microsoft.WindowsAPICodePack.Shell.dll" />
+    <file src="lib\net481\Microsoft.WindowsAPICodePack.ShellExtensions.dll" target="lib\net481\Microsoft.WindowsAPICodePack.ShellExtensions.dll" />
+    <file src="lib\net6.0-windows7.0\Microsoft.WindowsAPICodePack.Core.dll" target="lib\net6.0-windows7.0\Microsoft.WindowsAPICodePack.Core.dll" />
+    <file src="lib\net6.0-windows7.0\Microsoft.WindowsAPICodePack.ExtendedLinguisticServices.dll" target="lib\net6.0-windows7.0\Microsoft.WindowsAPICodePack.ExtendedLinguisticServices.dll" />
+    <file src="lib\net6.0-windows7.0\Microsoft.WindowsAPICodePack.Sensors.dll" target="lib\net6.0-windows7.0\Microsoft.WindowsAPICodePack.Sensors.dll" />
+    <file src="lib\net6.0-windows7.0\Microsoft.WindowsAPICodePack.Shell.dll" target="lib\net6.0-windows7.0\Microsoft.WindowsAPICodePack.Shell.dll" />
+    <file src="lib\net6.0-windows7.0\Microsoft.WindowsAPICodePack.ShellExtensions.dll" target="lib\net6.0-windows7.0\Microsoft.WindowsAPICodePack.ShellExtensions.dll" />
+    <file src="lib\net7.0-windows7.0\Microsoft.WindowsAPICodePack.Core.dll" target="lib\net7.0-windows7.0\Microsoft.WindowsAPICodePack.Core.dll" />
+    <file src="lib\net7.0-windows7.0\Microsoft.WindowsAPICodePack.ExtendedLinguisticServices.dll" target="lib\net7.0-windows7.0\Microsoft.WindowsAPICodePack.ExtendedLinguisticServices.dll" />
+    <file src="lib\net7.0-windows7.0\Microsoft.WindowsAPICodePack.Sensors.dll" target="lib\net7.0-windows7.0\Microsoft.WindowsAPICodePack.Sensors.dll" />
+    <file src="lib\net7.0-windows7.0\Microsoft.WindowsAPICodePack.Shell.dll" target="lib\net7.0-windows7.0\Microsoft.WindowsAPICodePack.Shell.dll" />
+    <file src="lib\net7.0-windows7.0\Microsoft.WindowsAPICodePack.ShellExtensions.dll" target="lib\net7.0-windows7.0\Microsoft.WindowsAPICodePack.ShellExtensions.dll" />
+    <file src="lib\netcoreapp3.1\Microsoft.WindowsAPICodePack.Core.dll" target="lib\netcoreapp3.1\Microsoft.WindowsAPICodePack.Core.dll" />
+    <file src="lib\netcoreapp3.1\Microsoft.WindowsAPICodePack.ExtendedLinguisticServices.dll" target="lib\netcoreapp3.1\Microsoft.WindowsAPICodePack.ExtendedLinguisticServices.dll" />
+    <file src="lib\netcoreapp3.1\Microsoft.WindowsAPICodePack.Sensors.dll" target="lib\netcoreapp3.1\Microsoft.WindowsAPICodePack.Sensors.dll" />
+    <file src="lib\netcoreapp3.1\Microsoft.WindowsAPICodePack.Shell.dll" target="lib\netcoreapp3.1\Microsoft.WindowsAPICodePack.Shell.dll" />
+    <file src="lib\netcoreapp3.1\Microsoft.WindowsAPICodePack.ShellExtensions.dll" target="lib\netcoreapp3.1\Microsoft.WindowsAPICodePack.ShellExtensions.dll" />
+    <file src="License.md" target="License.md" />
+    <file src="Windows.png" target="Windows.png" />
+  </files>
+</package>

@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation.  All rights reserved.
 
-#pragma warning disable CS8613, CS8614, CS8603, CS8602, CS8601
+using System.Collections;
+
 namespace Microsoft.WindowsAPICodePack.Sensors
 {
     /// <summary>
@@ -8,14 +9,14 @@ namespace Microsoft.WindowsAPICodePack.Sensors
     /// </summary>    
     public class SensorData : IDictionary<Guid, IList<object>>
     {
-        #region implementation
+        #region Implementation
         internal static SensorData? FromNativeReport(ISensor? iSensor, ISensorDataReport iReport)
         {
-            SensorData? data = new();
+            SensorData data = new SensorData();
 
             IPortableDeviceKeyCollection? keyCollection;
             IPortableDeviceValues? valuesCollection;
-            iSensor.GetSupportedDataFields(out keyCollection);
+            iSensor!.GetSupportedDataFields(out keyCollection);
             iReport.GetSensorValues(keyCollection, out valuesCollection);
 
             uint items = 0;
@@ -25,7 +26,7 @@ namespace Microsoft.WindowsAPICodePack.Sensors
                 for (uint index = 0; index < items; index++)
                 {
                     PropertyKey key;
-                    using (PropVariant propValue = new())
+                    using (PropVariant propValue = new PropVariant())
                     {
                         keyCollection.GetAt(index, out key);
                         if (valuesCollection != null) valuesCollection.GetValue(ref key, propValue);
@@ -59,7 +60,7 @@ namespace Microsoft.WindowsAPICodePack.Sensors
         }
         #endregion
 
-        private readonly Dictionary<Guid, IList<object?>> _sensorDataDictionary = new();
+        private readonly Dictionary<Guid, IList<object?>> _sensorDataDictionary = new Dictionary<Guid, IList<object?>>();
 
         #region IDictionary<Guid,IList<object>> Members
 
@@ -191,7 +192,7 @@ namespace Microsoft.WindowsAPICodePack.Sensors
         /// Returns an enumerator for the collection.
         /// </summary>
         /// <returns>An enumerator.</returns>
-        public IEnumerator<KeyValuePair<Guid, IList<object>>> GetEnumerator()
+        public IEnumerator<KeyValuePair<Guid, IList<object>>>? GetEnumerator()
         {
             return (_sensorDataDictionary as IEnumerator<KeyValuePair<Guid, IList<object>>>);
         }
@@ -203,7 +204,7 @@ namespace Microsoft.WindowsAPICodePack.Sensors
         /// Returns an enumerator for the collection.
         /// </summary>
         /// <returns>An enumerator.</returns>
-        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => _sensorDataDictionary as System.Collections.IEnumerator;
+        IEnumerator IEnumerable.GetEnumerator() => _sensorDataDictionary as IEnumerator;
 
         #endregion
     }

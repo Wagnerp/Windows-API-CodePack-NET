@@ -54,7 +54,7 @@ namespace Microsoft.WindowsAPICodePack.Sensors
         void GetIUnknownValue([In] ref PropertyKey key, [MarshalAs(UnmanagedType.IUnknown)] out object ppValue);
         void SetGuidValue([In] ref PropertyKey key, [In] ref Guid Value);
         void GetGuidValue([In] ref PropertyKey key, out Guid pValue);
-        void SetBufferValue([In] ref PropertyKey key, [In] byte[] pValue, [In] uint cbValue);
+        void SetBufferValue([In] ref PropertyKey key, [In] byte[]? pValue, [In] uint cbValue);
         void GetBufferValue([In] ref PropertyKey key, [Out] IntPtr ppValue, out uint pcbValue);
         void SetnativeIPortableDeviceValuesValue([In] ref PropertyKey key, [In, MarshalAs(UnmanagedType.Interface)] IPortableDeviceValues pValue);
         void GetnativeIPortableDeviceValuesValue([In] ref PropertyKey key, [MarshalAs(UnmanagedType.Interface)] out IPortableDeviceValues ppValue);
@@ -242,7 +242,7 @@ namespace Microsoft.WindowsAPICodePack.Sensors
         public virtual extern void GetGuidValue([In] ref PropertyKey key, out Guid pValue);
 
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-        public virtual extern void SetBufferValue([In] ref PropertyKey key, [In] byte[] pValue, [In] uint cbValue);
+        public virtual extern void SetBufferValue([In] ref PropertyKey key, [In] byte[]? pValue, [In] uint cbValue);
 
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         public virtual extern void GetBufferValue([In] ref PropertyKey key, [Out] IntPtr ppValue, out uint pcbValue);

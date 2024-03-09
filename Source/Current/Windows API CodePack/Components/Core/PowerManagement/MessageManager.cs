@@ -1,7 +1,7 @@
-﻿//Copyright (c) Microsoft Corporation.  All rights reserved.
+﻿
+//Copyright (c) Microsoft Corporation.  All rights reserved.
 
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
-#pragma warning disable CS8600, CS8605
 namespace Microsoft.WindowsAPICodePack.ApplicationServices
 {
     /// <summary>
@@ -10,7 +10,7 @@ namespace Microsoft.WindowsAPICodePack.ApplicationServices
     /// </summary>
     internal static class MessageManager
     {
-        private static object _lockObject = new();
+        private static object _lockObject = new object();
         private static PowerRegWindow? _window;
 
         #region Internal static methods
@@ -51,7 +51,7 @@ namespace Microsoft.WindowsAPICodePack.ApplicationServices
                 {
                     // Create a new hidden window to listen
                     // for power management related window messages.
-                    _window = new();
+                    _window = new PowerRegWindow();
                 }
             }
         }
@@ -141,7 +141,7 @@ namespace Microsoft.WindowsAPICodePack.ApplicationServices
                     {
                         if (handler != null)
                         {
-                            handler.Invoke(null, new());
+                            handler.Invoke(null, new EventArgs());
                         }
                     }
                 }

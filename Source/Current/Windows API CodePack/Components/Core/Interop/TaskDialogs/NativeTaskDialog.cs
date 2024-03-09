@@ -3,7 +3,9 @@
 // ReSharper disable SuggestVarOrType_BuiltInTypes
 // ReSharper disable SuggestVarOrType_SimpleTypes
 // ReSharper disable StringLiteralTypo
-#pragma warning disable CS8602, CS0472, CS8073
+
+using Microsoft.WindowsAPICodePack.Core;
+
 namespace Microsoft.WindowsAPICodePack.Dialogs
 {
     /// <summary>
@@ -87,11 +89,13 @@ namespace Microsoft.WindowsAPICodePack.Dialogs
                 bool checkBoxChecked;
 
                 // Here is the way we use "vanilla" P/Invoke to call TaskDialogIndirect().  
-                HResult hresult = TaskDialogNativeMethods.TaskDialogIndirect(
-                    _nativeDialogConfig,
-                    out selectedButtonId,
-                    out selectedRadioButtonId,
-                    out checkBoxChecked);
+                HResult hresult;
+
+                using (new EnableThemingInScope(true))
+                {
+                    hresult = TaskDialogNativeMethods.TaskDialogIndirect(_nativeDialogConfig, out selectedButtonId,
+                        out selectedRadioButtonId, out checkBoxChecked);
+                }
 
                 if (CoreErrorHelper.Failed(hresult))
                 {

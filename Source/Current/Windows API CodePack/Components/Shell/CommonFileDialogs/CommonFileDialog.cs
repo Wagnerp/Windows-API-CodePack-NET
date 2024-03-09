@@ -3,7 +3,6 @@
 // ReSharper disable SuggestVarOrType_BuiltInTypes
 // ReSharper disable RedundantAssignment
 // ReSharper disable SuspiciousTypeConversion.Global
-#pragma warning disable CS8600, CS8602, CS8604
 namespace Microsoft.WindowsAPICodePack.Dialogs
 {
     /// <summary>
@@ -870,18 +869,19 @@ namespace Microsoft.WindowsAPICodePack.Dialogs
                 throw new ArgumentNullException("control");
             }
 
-            CommonFileDialogControl? dialogControl = null;
+            CommonFileDialogControl? dialogControl;
             if (propertyName == "Text")
             {
                 CommonFileDialogTextBox? textBox = control as CommonFileDialogTextBox;
+                CommonFileDialogLabel? label = control as CommonFileDialogLabel;
 
                 if (textBox != null)
                 {
                     _customize.SetEditBoxText(control.Id, textBox.Text);
                 }
-                else
+                else if (label != null)
                 {
-                    _customize.SetControlLabel(control.Id, textBox.Text);
+                    _customize.SetControlLabel(control.Id, label.Text);
                 }
             }
             else if (propertyName == "Visible" && (dialogControl = control as CommonFileDialogControl) != null)

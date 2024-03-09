@@ -52,7 +52,7 @@ namespace Microsoft.WindowsAPICodePack.Sensors
         /// <param name="properties">The properties returned</param>
         [PreserveSig]
         HResult GetProperties(
-            [In, MarshalAs(UnmanagedType.Interface)] IPortableDeviceKeyCollection keys,
+            [In, MarshalAs(UnmanagedType.Interface)] IPortableDeviceKeyCollection? keys,
             [Out, MarshalAs(UnmanagedType.Interface)] out IPortableDeviceValues properties);
 
         /// <summary>

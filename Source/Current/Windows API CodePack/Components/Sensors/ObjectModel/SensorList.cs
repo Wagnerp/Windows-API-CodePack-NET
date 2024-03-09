@@ -8,7 +8,7 @@ namespace Microsoft.WindowsAPICodePack.Sensors
     /// <typeparam name="TSensor">The type of sensor in the list.</typeparam>        
     public class SensorList<TSensor> : IList<TSensor> where TSensor : Sensor
     {
-        private List<TSensor> sensorList = new();
+        private readonly List<TSensor> _sensorList = new List<TSensor>();
 
         #region IList<S> Members
 
@@ -19,7 +19,7 @@ namespace Microsoft.WindowsAPICodePack.Sensors
         /// <returns>The index of the sensor.</returns>
         public int IndexOf(TSensor item)
         {
-            return sensorList.IndexOf(item);
+            return _sensorList.IndexOf(item);
         }
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace Microsoft.WindowsAPICodePack.Sensors
         /// <param name="item">The sensor to insert.</param>
         public void Insert(int index, TSensor item)
         {
-            sensorList.Insert(index, item);
+            _sensorList.Insert(index, item);
         }
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace Microsoft.WindowsAPICodePack.Sensors
         /// <param name="index">The index of the sensor to remove.</param>
         public void RemoveAt(int index)
         {
-            sensorList.RemoveAt(index);
+            _sensorList.RemoveAt(index);
         }
 
         /// <summary>
@@ -48,8 +48,8 @@ namespace Microsoft.WindowsAPICodePack.Sensors
         /// <returns>The sensor.</returns>
         public TSensor this[int index]
         {
-            get => sensorList[index];
-            set => sensorList[index] = value;
+            get => _sensorList[index];
+            set => _sensorList[index] = value;
         }
 
         #endregion
@@ -62,7 +62,7 @@ namespace Microsoft.WindowsAPICodePack.Sensors
         /// <param name="item">The sensor item.</param>
         public void Add(TSensor item)
         {
-            sensorList.Add(item);
+            _sensorList.Add(item);
         }
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace Microsoft.WindowsAPICodePack.Sensors
         /// </summary>
         public void Clear()
         {
-            sensorList.Clear();
+            _sensorList.Clear();
         }
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace Microsoft.WindowsAPICodePack.Sensors
         /// <returns><b>true</b> if the list contains the sensor; otherwise <b>false</b>.</returns>
         public bool Contains(TSensor item)
         {
-            return sensorList.Contains(item);
+            return _sensorList.Contains(item);
         }
 
         /// <summary>
@@ -90,28 +90,25 @@ namespace Microsoft.WindowsAPICodePack.Sensors
         /// <param name="arrayIndex">The index of the item to copy.</param>
         public void CopyTo(TSensor[] array, int arrayIndex)
         {
-            sensorList.CopyTo(array, arrayIndex);
+            _sensorList.CopyTo(array, arrayIndex);
         }
 
         /// <summary>
         /// Gets the number of items in the list.
         /// </summary>
-        public int Count => sensorList.Count;
+        public int Count => _sensorList.Count;
 
         /// <summary>
         /// Gets a value that determines if the list is read-only.
         /// </summary>
-        public bool IsReadOnly => (sensorList as ICollection<TSensor>).IsReadOnly;
+        public bool IsReadOnly => (_sensorList as ICollection<TSensor>).IsReadOnly;
 
         /// <summary>
         /// Removes a specific sensor from the list.
         /// </summary>
         /// <param name="item">The sensor to remove.</param>
         /// <returns><b>true</b> if the sensor was removed from the list; otherwise <b>false</b>.</returns>
-        public bool Remove(TSensor item)
-        {
-            return sensorList.Remove(item); ;
-        }
+        public bool Remove(TSensor item) => _sensorList.Remove(item);
 
         #endregion
 
@@ -123,7 +120,7 @@ namespace Microsoft.WindowsAPICodePack.Sensors
         /// <returns>An enumerator.</returns>
         public IEnumerator<TSensor> GetEnumerator()
         {
-            return (sensorList.GetEnumerator());
+            return (_sensorList.GetEnumerator());
         }
 
         #endregion
@@ -136,7 +133,7 @@ namespace Microsoft.WindowsAPICodePack.Sensors
         /// <returns>An enumerator.</returns>
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
-            return sensorList.GetEnumerator();
+            return _sensorList.GetEnumerator();
         }
 
         #endregion

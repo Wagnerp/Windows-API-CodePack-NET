@@ -8,7 +8,7 @@ namespace Microsoft.WindowsAPICodePack.ExtendedLinguisticServices
     /// </summary>
     public class StringArrayFormatter : IMappingFormatter<string[]>
     {
-        private static readonly char[] Separator = new char[] { '\0' };
+        private static readonly char[] Separator = ['\0'];
 
         /// <summary>
         /// Converts a single <see cref="MappingDataRange">MappingDataRange</see> into a string array by splitting on each null character and

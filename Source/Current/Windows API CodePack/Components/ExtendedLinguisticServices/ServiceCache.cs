@@ -11,7 +11,7 @@ namespace Microsoft.WindowsAPICodePack.ExtendedLinguisticServices
         // Guid -> IntPtr
         private Dictionary<Guid, IntPtr>? _guidToService = new();
         // IntPtr -> this (serves as a set)
-        private List<IntPtr>? _servicePointers = new();
+        private List<IntPtr>? _servicePointers = [];
         // The lock
         private ReaderWriterLockSlim _cacheLock = new();
         // Active resources refcount, signed 64-bit

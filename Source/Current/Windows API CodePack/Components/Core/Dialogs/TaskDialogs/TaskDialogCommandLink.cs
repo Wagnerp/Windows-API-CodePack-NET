@@ -49,7 +49,7 @@ namespace Microsoft.WindowsAPICodePack.Dialogs
         {
             return string.Format(CultureInfo.CurrentCulture, "{0}{1}{2}",
                 Text ?? string.Empty,
-                (!string.IsNullOrEmpty(Text) && !string.IsNullOrEmpty(_instruction)) ? "\n" : string.Empty,
+                (!string.IsNullOrEmpty(Text) && !string.IsNullOrEmpty(_instruction)) ? Environment.NewLine : string.Empty,
                 _instruction ?? string.Empty);
         }
     }

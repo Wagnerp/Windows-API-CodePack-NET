@@ -2,7 +2,6 @@
 
 // ReSharper disable SuggestVarOrType_BuiltInTypes
 // ReSharper disable ConditionIsAlwaysTrueOrFalse
-#pragma warning disable CS8600, CS8602
 namespace MS.WindowsAPICodePack.Internal
 {
     /// <summary>

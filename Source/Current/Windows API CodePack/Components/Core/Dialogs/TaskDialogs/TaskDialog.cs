@@ -20,9 +20,9 @@ namespace Microsoft.WindowsAPICodePack.Dialogs
         // Main current native dialog.
         private NativeTaskDialog? _nativeDialog;
 
-        private List<TaskDialogButtonBase?>? _buttons = new();
-        private List<TaskDialogButtonBase?>? _radioButtons = new();
-        private List<TaskDialogButtonBase?>? _commandLinks = new();
+        private List<TaskDialogButtonBase?>? _buttons = [];
+        private List<TaskDialogButtonBase?>? _radioButtons = [];
+        private List<TaskDialogButtonBase?>? _commandLinks = [];
         private IntPtr _ownerWindow;
 
         #region Public Properties
@@ -271,17 +271,17 @@ namespace Microsoft.WindowsAPICodePack.Dialogs
             }
         }
 
-        private TaskDialogDefaultButton defaultButton = TaskDialogDefaultButton.None;
+        private TaskDialogDefaultButton _defaultButton = TaskDialogDefaultButton.None;
         /// <summary>
         /// Gets or sets a value that contains the default button.
         /// </summary>
         public TaskDialogDefaultButton DefaultButton
         {
-            get { return defaultButton; }
+            get => _defaultButton;
             set
             {
                 ThrowIfDialogShowing(LocalizedMessages.DefaultButtonCannotBeChanged);
-                defaultButton = value;
+                _defaultButton = value;
             }
         }
 
@@ -309,7 +309,7 @@ namespace Microsoft.WindowsAPICodePack.Dialogs
             }
         }
 
-        private bool? _footerCheckBoxChecked = null;
+        private bool? _footerCheckBoxChecked;
         /// <summary>
         /// Gets or sets a value that indicates if the footer checkbox is checked.
         /// </summary>
@@ -557,13 +557,13 @@ namespace Microsoft.WindowsAPICodePack.Dialogs
         }
 
         // Helper that looks at the current state of the TaskDialog and verifies
-        // that there aren't any abberant combinations of properties.
+        // that there aren't any aberrant combinations of properties.
         // NOTE that this method is designed to throw 
         // rather than return a bool.
         private void ValidateCurrentDialogSettings()
         {
             if (_footerCheckBoxChecked.HasValue &&
-                _footerCheckBoxChecked.Value == true &&
+                _footerCheckBoxChecked.Value &&
                 string.IsNullOrEmpty(_checkBoxText))
             {
                 throw new InvalidOperationException(LocalizedMessages.TaskDialogCheckBoxTextRequiredToEnableCheckBox);
@@ -574,7 +574,7 @@ namespace Microsoft.WindowsAPICodePack.Dialogs
             // the Win32 API will valiantly try to rationalize 
             // bizarre min/max/value combinations, but we'll save
             // it the trouble by validating.
-            if (_progressBar != null && !_progressBar.HasValidValues)
+            if (_progressBar is { HasValidValues: false })
             {
                 throw new InvalidOperationException(LocalizedMessages.TaskDialogProgressBarValueInRange);
             }
@@ -583,7 +583,7 @@ namespace Microsoft.WindowsAPICodePack.Dialogs
             // Make sure we don't have buttons AND 
             // command-links - the Win32 API treats them as different
             // flavors of a single button struct.
-            if (_buttons.Count > 0 && _commandLinks.Count > 0)
+            if (_buttons!.Count > 0 && _commandLinks!.Count > 0)
             {
                 throw new NotSupportedException(LocalizedMessages.TaskDialogSupportedButtonsAndLinks);
             }
@@ -597,7 +597,7 @@ namespace Microsoft.WindowsAPICodePack.Dialogs
         // final TaskDialogResult that will be returned from the public API
         private static TaskDialogResult ConstructDialogResult(NativeTaskDialog? native)
         {
-            Debug.Assert(native != null && native.ShowState == DialogShowState.Closed, "dialog result being constructed for unshown dialog.");
+            Debug.Assert(native != null && native.ShowState == DialogShowState.Closed, "dialog result being constructed for un-shown dialog.");
 
             TaskDialogResult result = TaskDialogResult.Cancel;
 
@@ -682,6 +682,7 @@ namespace Microsoft.WindowsAPICodePack.Dialogs
             dialogConfig.mainIcon = new((IntPtr)_icon);
             dialogConfig.footerIcon = new((IntPtr)_footerIcon);
             dialogConfig.commonButtons = (TaskDialogNativeMethods.TaskDialogCommonButtons)_standardButtons;
+            dialogConfig.defaultButtonIndex = (int)_defaultButton;
         }
 
         /// <summary>
@@ -768,7 +769,7 @@ namespace Microsoft.WindowsAPICodePack.Dialogs
             // needs - though NTD will handle
             // the heavy lifting marshalling to make sure 
             // all the cleanup is centralized there.
-            if (_buttons.Count > 0 || _commandLinks.Count > 0)
+            if (_buttons!.Count > 0 || _commandLinks!.Count > 0)
             {
                 // These are the actual arrays/lists of 
                 // the structs that we'll copy to the 
@@ -778,7 +779,7 @@ namespace Microsoft.WindowsAPICodePack.Dialogs
 
                 // Apply option flag that forces all 
                 // custom buttons to render as command links.
-                if (_commandLinks.Count > 0)
+                if (_commandLinks!.Count > 0)
                 {
                     settings.NativeConfiguration.taskDialogFlags |= TaskDialogNativeMethods.TaskDialogOptions.UseCommandLinks;
                 }
@@ -841,7 +842,7 @@ namespace Microsoft.WindowsAPICodePack.Dialogs
             {
                 if (control.UseElevationIcon)
                 {
-                    if (settings.ElevatedButtons == null) { settings.ElevatedButtons = new(); }
+                    if (settings.ElevatedButtons == null) { settings.ElevatedButtons = []; }
                     settings.ElevatedButtons.Add(control.Id);
                 }
             }
@@ -889,12 +890,12 @@ namespace Microsoft.WindowsAPICodePack.Dialogs
                 }
                 else if ((radButton = control as TaskDialogRadioButton) != null)
                 {
-                    if (_radioButtons == null) { _radioButtons = new(); }
+                    if (_radioButtons == null) { _radioButtons = []; }
                     _radioButtons.Add(radButton);
                 }
                 else if (buttonBase != null)
                 {
-                    if (_buttons == null) { _buttons = new(); }
+                    if (_buttons == null) { _buttons = []; }
                     _buttons.Add(buttonBase);
                 }
                 else if ((progBar = control as TaskDialogProgressBar) != null)
@@ -1332,9 +1333,5 @@ namespace Microsoft.WindowsAPICodePack.Dialogs
         public static bool IsPlatformSupported =>
             // We need Windows Vista onwards ...
             CoreHelpers.RunningOnVista;
-    }
-
-    internal class TaskDialogDefaultButton
-    {
     }
 }

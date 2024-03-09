@@ -1,6 +1,5 @@
 ﻿using STATSTG = System.Runtime.InteropServices.ComTypes.STATSTG;
 // ReSharper disable IdentifierTypo
-#pragma warning disable CS8602
 
 namespace Microsoft.WindowsAPICodePack.ShellExtensions
 {

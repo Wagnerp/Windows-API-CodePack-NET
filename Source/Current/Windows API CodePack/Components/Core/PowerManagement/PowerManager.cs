@@ -146,7 +146,7 @@ namespace Microsoft.WindowsAPICodePack.ApplicationServices
         public static BatteryState GetCurrentBatteryState()
         {
             CoreHelpers.ThrowIfNotXp();
-            return new();
+            return new BatteryState();
         }
 
         #region Power System Properties

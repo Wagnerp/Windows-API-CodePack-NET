@@ -2,7 +2,6 @@
 
 // ReSharper disable RedundantAssignment
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
-#pragma warning disable CS0472, CS8605, CS8602, CS8600, CS8604, CS0436, CS8597
 namespace Microsoft.WindowsAPICodePack.Sensors
 {
     /// <summary>
@@ -42,7 +41,7 @@ namespace Microsoft.WindowsAPICodePack.Sensors
                 if (_sensorId == null)
                 {
                     Guid id;
-                    HResult hr = _nativeISensor.GetID(out id);
+                    HResult? hr = _nativeISensor!.GetID(out id);
                     if (hr == HResult.Ok)
                     {
                         _sensorId = id;
@@ -63,7 +62,7 @@ namespace Microsoft.WindowsAPICodePack.Sensors
                 if (_categoryId == null)
                 {
                     Guid id;
-                    HResult hr = _nativeISensor.GetCategory(out id);
+                    HResult? hr = _nativeISensor!.GetCategory(out id);
                     if (hr == HResult.Ok)
                     {
                         _categoryId = id;
@@ -85,7 +84,7 @@ namespace Microsoft.WindowsAPICodePack.Sensors
                 if (_typeId == null)
                 {
                     Guid id;
-                    HResult hr = _nativeISensor.GetType(out id);
+                    HResult? hr = _nativeISensor!.GetType(out id);
                     if (hr == HResult.Ok)
                         _typeId = id;
                 }
@@ -105,7 +104,7 @@ namespace Microsoft.WindowsAPICodePack.Sensors
                 if (_friendlyName == null)
                 {
                     string? name;
-                    HResult hr = _nativeISensor.GetFriendlyName(out name);
+                    HResult? hr = _nativeISensor!.GetFriendlyName(out name);
                     if (hr == HResult.Ok)
                         _friendlyName = name;
                 }
@@ -122,7 +121,7 @@ namespace Microsoft.WindowsAPICodePack.Sensors
             get
             {
                 NativeSensorState state;
-                _nativeISensor.GetState(out state);
+                _nativeISensor!.GetState(out state);
                 return (SensorState)state;
             }
         }
@@ -151,10 +150,7 @@ namespace Microsoft.WindowsAPICodePack.Sensors
         {
             get
             {
-                if (_manufacturer == null)
-                {
-                    _manufacturer = (string)GetProperty(SensorPropertyKeys.SensorPropertyManufacturer);
-                }
+                _manufacturer ??= GetProperty(SensorPropertyKeys.SensorPropertyManufacturer) as string;
                 return _manufacturer;
             }
         }
@@ -169,7 +165,7 @@ namespace Microsoft.WindowsAPICodePack.Sensors
             {
                 if (_model == null)
                 {
-                    _model = (string)GetProperty(SensorPropertyKeys.SensorPropertyModel);
+                    _model = GetProperty(SensorPropertyKeys.SensorPropertyModel) as string;
                 }
                 return _model;
             }
@@ -185,7 +181,7 @@ namespace Microsoft.WindowsAPICodePack.Sensors
             {
                 if (_serialNumber == null)
                 {
-                    _serialNumber = (string)GetProperty(SensorPropertyKeys.SensorPropertySerialNumber);
+                    _serialNumber = GetProperty(SensorPropertyKeys.SensorPropertySerialNumber) as string;
                 }
                 return _serialNumber;
             }
@@ -201,7 +197,7 @@ namespace Microsoft.WindowsAPICodePack.Sensors
             {
                 if (_description == null)
                 {
-                    _description = (string)GetProperty(SensorPropertyKeys.SensorPropertyDescription);
+                    _description = GetProperty(SensorPropertyKeys.SensorPropertyDescription) as string;
                 }
 
                 return _description;
@@ -218,7 +214,8 @@ namespace Microsoft.WindowsAPICodePack.Sensors
             {
                 if (_connectionType == null)
                 {
-                    _connectionType = (SensorConnectionType)GetProperty(SensorPropertyKeys.SensorPropertyConnectionType);
+                    _connectionType =
+                        (SensorConnectionType)GetProperty(SensorPropertyKeys.SensorPropertyConnectionType);
                 }
                 return _connectionType;
             }
@@ -234,7 +231,7 @@ namespace Microsoft.WindowsAPICodePack.Sensors
             {
                 if (_devicePath == null)
                 {
-                    _devicePath = (string)GetProperty(SensorPropertyKeys.SensorPropertyDeviceId);
+                    _devicePath = GetProperty(SensorPropertyKeys.SensorPropertyDeviceId) as string;
                 }
 
                 return _devicePath;
@@ -267,7 +264,7 @@ namespace Microsoft.WindowsAPICodePack.Sensors
         /// <returns><b>true</b> if the request was successful; otherwise <b>false</b>.</returns>
         public bool TryUpdateData()
         {
-            HResult hr = InternalUpdateData();
+            HResult? hr = InternalUpdateData();
             return (hr == HResult.Ok);
         }
 
@@ -276,7 +273,7 @@ namespace Microsoft.WindowsAPICodePack.Sensors
         /// </summary>
         public void UpdateData()
         {
-            HResult hr = InternalUpdateData();
+            HResult? hr = InternalUpdateData();
             if (hr != HResult.Ok)
             {
                 throw new SensorPlatformException(LocalizedMessages.SensorsNotFound, Marshal.GetExceptionForHR((int)hr));
@@ -286,8 +283,8 @@ namespace Microsoft.WindowsAPICodePack.Sensors
         internal HResult InternalUpdateData()
         {
 
-            ISensorDataReport iReport;
-            HResult hr = _nativeISensor.GetData(out iReport);
+            ISensorDataReport? iReport;
+            HResult hr = _nativeISensor!.GetData(out iReport);
             if (hr == HResult.Ok)
             {
                 try
@@ -328,12 +325,12 @@ namespace Microsoft.WindowsAPICodePack.Sensors
         /// <returns>A property value.</returns>        
         public object? GetProperty(PropertyKey propKey)
         {
-            using (PropVariant pv = new())
+            using (PropVariant pv = new PropVariant())
             {
-                HResult hr = _nativeISensor.GetProperty(ref propKey, pv);
+                HResult? hr = _nativeISensor!.GetProperty(ref propKey, pv);
                 if (hr != HResult.Ok)
                 {
-                    Exception e = Marshal.GetExceptionForHR((int)hr);
+                    Exception? e = Marshal.GetExceptionForHR((int)hr);
                     if (hr == HResult.ElementNotFound)
                     {
                         throw new ArgumentOutOfRangeException(LocalizedMessages.SensorPropertyNotFound, e);
@@ -371,10 +368,10 @@ namespace Microsoft.WindowsAPICodePack.Sensors
                 throw new ArgumentException(LocalizedMessages.SensorEmptyProperties, "propKeys");
             }
 
-            IPortableDeviceKeyCollection keyCollection = new PortableDeviceKeyCollection();
+            IPortableDeviceKeyCollection? keyCollection = new PortableDeviceKeyCollection();
             try
             {
-                IPortableDeviceValues valuesCollection;
+                IPortableDeviceValues? valuesCollection;
 
                 for (int i = 0; i < propKeys.Length; i++)
                 {
@@ -383,7 +380,7 @@ namespace Microsoft.WindowsAPICodePack.Sensors
                 }
 
                 Dictionary<PropertyKey, object?> data = new();
-                HResult hr = _nativeISensor.GetProperties(keyCollection, out valuesCollection);
+                HResult hr = _nativeISensor!.GetProperties(keyCollection, out valuesCollection);
                 if (CoreErrorHelper.Succeeded(hr) && valuesCollection != null)
                 {
                     try
@@ -394,8 +391,8 @@ namespace Microsoft.WindowsAPICodePack.Sensors
 
                         for (uint i = 0; i < count; i++)
                         {
-                            PropertyKey propKey = new();
-                            using (PropVariant propVal = new())
+                            PropertyKey propKey = new PropertyKey();
+                            using (PropVariant propVal = new PropVariant())
                             {
                                 valuesCollection.GetAt(i, ref propKey, propVal);
                                 data.Add(propKey, propVal.Value);
@@ -429,21 +426,21 @@ namespace Microsoft.WindowsAPICodePack.Sensors
                 throw new SensorPlatformException(LocalizedMessages.SensorNotInitialized);
             }
 
-            List<PropertyKey>? list = new();
+            List<PropertyKey> list = new List<PropertyKey>();
             IPortableDeviceKeyCollection? collection;
-            HResult hr = _nativeISensor.GetSupportedDataFields(out collection);
+            HResult? hr = _nativeISensor!.GetSupportedDataFields(out collection);
             if (hr == HResult.Ok)
             {
                 try
                 {
                     uint elements = 0;
-                    collection.GetCount(out elements);
+                    collection?.GetCount(out elements);
                     if (elements == 0) { return null; }
 
                     for (uint element = 0; element < elements; element++)
                     {
                         PropertyKey key;
-                        hr = collection.GetAt(element, out key);
+                        hr = collection!.GetAt(element, out key);
                         if (hr == HResult.Ok)
                         {
                             list.Add(key);
@@ -482,21 +479,21 @@ namespace Microsoft.WindowsAPICodePack.Sensors
             IPortableDeviceKeyCollection keyCollection = new PortableDeviceKeyCollection();
             try
             {
-                IPortableDeviceValues valuesCollection;
-                Dictionary<PropertyKey, int> propKeyToIdx = new();
+                IPortableDeviceValues? valuesCollection;
+                Dictionary<PropertyKey, int> propKeyToIdx = new Dictionary<PropertyKey, int>();
 
                 for (int i = 0; i < propIndexes.Length; i++)
                 {
                     if (TypeId != null)
                     {
-                        PropertyKey propKey = new(TypeId.Value, propIndexes[i]);
+                        PropertyKey propKey = new PropertyKey(TypeId.Value, propIndexes[i]);
                         keyCollection.Add(ref propKey);
                         propKeyToIdx.Add(propKey, i);
                     }
                 }
 
                 object?[] data = new object[propIndexes.Length];
-                HResult hr = _nativeISensor.GetProperties(keyCollection, out valuesCollection);
+                HResult? hr = _nativeISensor!.GetProperties(keyCollection, out valuesCollection);
                 if (hr == HResult.Ok)
                 {
                     try
@@ -509,7 +506,7 @@ namespace Microsoft.WindowsAPICodePack.Sensors
                         for (uint i = 0; i < count; i++)
                         {
                             PropertyKey propKey = new();
-                            using (PropVariant propVal = new())
+                            using (PropVariant propVal = new PropVariant())
                             {
                                 valuesCollection.GetAt(i, ref propKey, propVal);
 
@@ -569,7 +566,7 @@ namespace Microsoft.WindowsAPICodePack.Sensors
                 }
                 catch (ArgumentException)
                 {
-                    byte[] buffer;
+                    byte[]? buffer;
                     if (value is Guid)
                     {
                         Guid guid = (Guid)value;
@@ -586,9 +583,9 @@ namespace Microsoft.WindowsAPICodePack.Sensors
                 }
             }
 
-            Dictionary<PropertyKey, object?> results = new();
-            IPortableDeviceValues pdv2 = null;
-            HResult hr = _nativeISensor.SetProperties(pdv, out pdv2);
+            Dictionary<PropertyKey, object?> results = new Dictionary<PropertyKey, object?>();
+            IPortableDeviceValues? pdv2 = null;
+            HResult? hr = _nativeISensor!.SetProperties(pdv, out pdv2);
             if (hr == HResult.Ok)
             {
                 try
@@ -667,7 +664,7 @@ namespace Microsoft.WindowsAPICodePack.Sensors
             {
                 _nativeISensor = value;
                 SetEventInterest(EventInterestTypes.StateChanged);
-                _nativeISensor.SetEventSink(this);
+                _nativeISensor?.SetEventSink(this);
                 Initialize();
             }
         }
@@ -693,7 +690,7 @@ namespace Microsoft.WindowsAPICodePack.Sensors
             interestingEvents.CopyTo(newEventInterest, 0);
             newEventInterest[interestCount] = eventType;
 
-            HResult hr = _nativeISensor.SetEventInterest(newEventInterest, (uint)(interestCount + 1));
+            HResult? hr = _nativeISensor!.SetEventInterest(newEventInterest, (uint)(interestCount + 1));
             if (hr != HResult.Ok || hr != null)
             {
                 throw Marshal.GetExceptionForHR((int)hr);
@@ -753,7 +750,7 @@ namespace Microsoft.WindowsAPICodePack.Sensors
         {
             IntPtr values;
             uint interestCount;
-            _nativeISensor.GetEventInterest(out values, out interestCount);
+            _nativeISensor!.GetEventInterest(out values, out interestCount);
             Guid[] interestingEvents = new Guid[interestCount];
             for (int index = 0; index < interestCount; index++)
             {

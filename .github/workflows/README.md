@@ -9,7 +9,7 @@ This repository includes comprehensive GitHub Actions workflows for building, te
 
 **Features:**
 - Builds all .NET projects (.NET Framework 4.6.2-4.8.1, .NET 8-10)
-- Builds C++ DirectX project (x64, x86 platforms)
+- DirectX stub is not built or packaged
 - Runs tests and uploads results
 - Validates NuGet package generation
 - Performs security scans

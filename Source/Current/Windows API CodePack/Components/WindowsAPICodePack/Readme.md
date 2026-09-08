@@ -37,6 +37,7 @@ using Microsoft.WindowsAPICodePack.ShellExtensions;
 - .NET Framework 4.6.2, 4.7, 4.7.1, 4.7.2, 4.8, 4.8.1
 - .NET 8.0 (Windows)
 - .NET 9.0 (Windows)
+- .NET 10.0 (Windows)
 
 ## Individual Packages
 

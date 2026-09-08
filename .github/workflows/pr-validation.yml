@@ -38,11 +38,6 @@ jobs:
         dotnet build "${{ env.SOLUTION_PATH }}" --configuration Release --no-restore --verbosity normal
       working-directory: .
     
-    - name: Build C++ DirectX project
-      run: |
-        msbuild "Source/Current/Windows API CodePack/Components/DirectX/DirectX.vcxproj" /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v143 /verbosity:normal
-      working-directory: .
-    
     - name: Run code analysis
       run: |
         dotnet build "${{ env.SOLUTION_PATH }}" --configuration Release --no-restore --verbosity normal --property:RunAnalyzersDuringBuild=true
@@ -135,7 +130,9 @@ jobs:
             New-Item -ItemType Directory -Path $extractPath -Force | Out-Null
             
             # Extract package
-            Expand-Archive -Path $package.FullName -DestinationPath $extractPath -Force
+            $zipPath = [System.IO.Path]::ChangeExtension($package.FullName, ".zip")
+            Copy-Item $package.FullName $zipPath -Force
+            Expand-Archive -Path $zipPath -DestinationPath $extractPath -Force
             
             # Check for required files
             $nuspecFile = Get-ChildItem -Path $extractPath -Filter "*.nuspec" -Recurse

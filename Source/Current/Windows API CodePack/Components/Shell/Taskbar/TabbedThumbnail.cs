@@ -360,6 +360,9 @@ public class TabbedThumbnail : IDisposable
     /// </summary>
     public event EventHandler<TabbedThumbnailClosedEventArgs>? TabbedThumbnailClosed;
 
+    /// <summary>
+    /// The event that occurs when a tab is closing on the taskbar thumbnail preview.
+    /// </summary>
     public event EventHandler<TabbedThumbnailClosingEventArgs>? TabbedThumbnailClosing;
 
     /// <summary>
@@ -550,4 +553,10 @@ public class TabbedThumbnail : IDisposable
     }
 
     #endregion
+
+    /// <summary>
+    /// Raises the <see cref="TabbedThumbnailClosed"/> event.
+    /// </summary>
+    /// <param name="e">The event arguments.</param>
+    protected virtual void OnTabbedThumbnailClosed(TabbedThumbnailClosedEventArgs e) => TabbedThumbnailClosed?.Invoke(this, e);
 }

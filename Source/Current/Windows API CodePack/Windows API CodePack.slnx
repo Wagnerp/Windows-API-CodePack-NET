@@ -19,6 +19,8 @@
     <File Path="../../../Directory.Build.props" />
     <File Path="../../../LICENSE" />
     <File Path="../../../README.md" />
+    <File Path="../ROADMAP.md" />
+    <File Path="../../../CONTRIBUTING.md" />
     <File Path=".editorconfig" />
     <File Path="Directory.Build.props" />
     <File Path="Directory.Build.targets" />
@@ -38,4 +40,5 @@
   </Folder>
   <Project Path="BugTest/BugTest.csproj" />
   <Project Path="ScratchProject/ScratchProject.csproj" />
+  <Project Path="Tests/Tests.csproj" />
 </Solution>

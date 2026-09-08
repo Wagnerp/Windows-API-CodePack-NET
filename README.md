@@ -1,117 +1,83 @@
-# Microsoft Windows API Codepack
+# Windows API Code Pack for .NET
 
 [![CI Build](https://github.com/Wagnerp/Windows-API-CodePack-NET/actions/workflows/ci.yml/badge.svg)](https://github.com/Wagnerp/Windows-API-CodePack-NET/actions/workflows/ci.yml)
 [![Release](https://github.com/Wagnerp/Windows-API-CodePack-NET/actions/workflows/release.yml/badge.svg)](https://github.com/Wagnerp/Windows-API-CodePack-NET/actions/workflows/release.yml)
 [![NuGet Version](https://img.shields.io/nuget/v/WindowsAPICodePackCore.svg)](https://www.nuget.org/packages/WindowsAPICodePackCore/)
 [![NuGet Downloads](https://img.shields.io/nuget/dt/WindowsAPICodePackCore.svg)](https://www.nuget.org/packages/WindowsAPICodePackCore/)
 
-=========================
+Managed wrappers for selected Windows Shell and desktop APIs, originally released by Microsoft as the Windows API Code Pack 1.1 and maintained here for modern .NET.
 
-License
--------
+**Active source:** [`Source/Current/Windows API CodePack`](Source/Current/Windows%20API%20CodePack)  
+**License:** MIT — see [LICENSE](LICENSE)  
+**Roadmap:** [Source/Current/ROADMAP.md](Source/Current/ROADMAP.md) · **Changes:** [Changelog.md](Changelog.md)
 
-The library is not developed anymore by Microsoft and seems to have been left as 'free to use'. A clarification or update about the licence terms from Microsoft is welcome, however.
- 
-Release notes
--------------
+## Packages
 
-This release has the latest bug fixes applied, including the fix for 64-bit exceptions.
+| Package | Contents |
+|---------|----------|
+| [WindowsAPICodePack](https://www.nuget.org/packages/WindowsAPICodePack/) | Meta-package (all components) |
+| [WindowsAPICodePackCore](https://www.nuget.org/packages/WindowsAPICodePackCore/) | Task Dialogs, power, network list, restart/recovery |
+| [WindowsAPICodePackShell](https://www.nuget.org/packages/WindowsAPICodePackShell/) | Shell objects, Common File Dialogs, Explorer Browser, taskbar |
+| [WindowsAPICodePackSensors](https://www.nuget.org/packages/WindowsAPICodePackSensors/) | Sensor platform |
+| [WindowsAPICodePackExtendedLinguisticServices](https://www.nuget.org/packages/WindowsAPICodePackExtendedLinguisticServices/) | Extended Linguistic Services |
+| [WindowsAPICodePackShellExtensions](https://www.nuget.org/packages/WindowsAPICodePackShellExtensions/) | Preview handlers and thumbnail providers |
 
-Bugs
-----
+**Target frameworks:** .NET Framework 4.6.2–4.8.1 and .NET 8 / 9 / 10 (`net*-windows`). Windows desktop (WinForms/WPF) only.
 
-When you submit a bug:
+DirectX from the original Code Pack is **not shipped** in 8.x. The Current tree keeps an unbuilt stub; see [`Components/DirectX/README.md`](Source/Current/Windows%20API%20CodePack/Components/DirectX/README.md).
 
- - provide a short example code showing the bug
- - describe the expected behavior/result
- - if a pull request is applicable, please reference it
+## Usage notes
 
-Pull Requests
--------------
+### TaskDialog and comctl32 v6
 
-I'll be glad to accept pull requests if they fix a bug or add a worthwhile feature.
+If creating a `TaskDialog` throws `NotSupportedException` about comctl32.dll version 6, enable Common Controls v6 in the application manifest:
 
-
-Usage notes
------------
-
-**TaskDialog**
-
-If you get the following exception when you instantiate a `TaskDialog`:
-
-```
-An unhandled exception of type 'System.NotSupportedException' occurred in Microsoft.WindowsAPICodePack.dll
-
-Additional information: TaskDialog feature needs to load version 6 of comctl32.dll but a different version is current loaded in memory.
-```
-
-To fix it, create an application manifest and un-comment the following block section:
-
-```
-  <!-- Enable themes for Windows common controls and dialogs (Windows XP and later) -->
-  <!-- <dependency>
-    <dependentAssembly>
-      <assemblyIdentity
-          type="win32"
-          name="Microsoft.Windows.Common-Controls"
-          version="6.0.0.0"
-          processorArchitecture="*"
-          publicKeyToken="6595b64144ccf1df"
-          language="*"
-        />
-    </dependentAssembly>
-  </dependency>-->
+```xml
+<dependency>
+  <dependentAssembly>
+    <assemblyIdentity
+        type="win32"
+        name="Microsoft.Windows.Common-Controls"
+        version="6.0.0.0"
+        processorArchitecture="*"
+        publicKeyToken="6595b64144ccf1df"
+        language="*" />
+  </dependentAssembly>
+</dependency>
 ```
 
-Note: you might have to restart Visual Studio as the DLLs seems to be cached in memory and rebuilding your project doesn't seem to be enough in some cases.
+Visual Studio can cache the old DLL in-process; restart the IDE if the error persists after adding the manifest.
 
-**DirectX**
+### Authenticode signing
 
-The DirectX package will work under x86 and x64 configuration platforms but not for AnyCPU platform (because there is no such platform for C++/CLI projects). Consequently, the package will purposefully fail the build and tell you why it did.
+Optional during build. Disabled by default.
 
-Note: package is here for historical reasons, it is highly recommended to use [SharpDX](http://sharpdx.org/) instead.
+**Certificate file:**
 
-**Authenticode Signing**
+```xml
+<PropertyGroup>
+  <EnableAuthenticodeSigning>true</EnableAuthenticodeSigning>
+  <CodeSigningCertificatePath>path\to\your\certificate.pfx</CodeSigningCertificatePath>
+  <CodeSigningCertificatePassword>your-password</CodeSigningCertificatePassword>
+</PropertyGroup>
+```
 
-The project supports Authenticode signing of DLLs to provide code integrity verification. To enable Authenticode signing during build:
+**Certificate store:**
 
-1. **Using a Certificate File (.pfx):**
-   ```xml
-   <PropertyGroup>
-     <EnableAuthenticodeSigning>true</EnableAuthenticodeSigning>
-     <CodeSigningCertificatePath>path\to\your\certificate.pfx</CodeSigningCertificatePath>
-     <CodeSigningCertificatePassword>your-password</CodeSigningCertificatePassword> <!-- Optional -->
-   </PropertyGroup>
-   ```
+```xml
+<PropertyGroup>
+  <EnableAuthenticodeSigning>true</EnableAuthenticodeSigning>
+  <CodeSigningCertificateThumbprint>your-certificate-thumbprint</CodeSigningCertificateThumbprint>
+</PropertyGroup>
+```
 
-2. **Using a Certificate from Certificate Store:**
-   ```xml
-   <PropertyGroup>
-     <EnableAuthenticodeSigning>true</EnableAuthenticodeSigning>
-     <CodeSigningCertificateThumbprint>your-certificate-thumbprint</CodeSigningCertificateThumbprint>
-   </PropertyGroup>
-   ```
+Requires Windows SDK (`SignTool.exe`). The build continues with a warning if signing fails. For GitHub Actions, see [`.github/workflows/README.md`](.github/workflows/README.md) (`CODESIGN_CERTIFICATE_BASE64`, `CODESIGN_CERTIFICATE_PASSWORD`).
 
-3. **Via MSBuild Command Line:**
-   ```bash
-   dotnet build /p:EnableAuthenticodeSigning=true /p:CodeSigningCertificatePath="path\to\certificate.pfx" /p:CodeSigningCertificatePassword="password"
-   ```
+## Samples and original tree
 
-**Requirements:**
-- Windows SDK must be installed (SignTool.exe is required)
-- A valid code signing certificate (either .pfx file or installed in certificate store)
-- The certificate must be valid for code signing
+- [`Source/Samples`](Source/Samples) — mix of modernized and legacy demos; prefer samples that reference `Source/Current`.
+- [`Source/Original`](Source/Original) — archive of the Microsoft-era sources, tests, and full DirectX.
 
-**Note:** Authenticode signing is disabled by default. You must explicitly enable it by setting `EnableAuthenticodeSigning=true`. The build will continue even if signing fails (with a warning), so you can build without a certificate for development purposes.
+## Contributing
 
-**GitHub Actions Workflow Support:**
-
-Authenticode signing is also supported in GitHub Actions workflows. To enable signing in release builds:
-
-1. Add your code signing certificate as a GitHub secret:
-   - `CODESIGN_CERTIFICATE_BASE64`: Base64-encoded PFX certificate file
-   - `CODESIGN_CERTIFICATE_PASSWORD`: Certificate password (if required)
-
-2. The release workflow will automatically sign all DLLs when these secrets are present.
-
-See `.github/workflows/README.md` for detailed setup instructions.
+See [CONTRIBUTING.md](CONTRIBUTING.md). Bug reports should include Windows version, TFM, and package version ([template](.github/ISSUE_TEMPLATE/bug_report.md)).

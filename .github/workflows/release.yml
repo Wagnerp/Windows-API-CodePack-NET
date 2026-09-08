@@ -152,11 +152,6 @@ jobs:
         dotnet build "${{ env.SOLUTION_PATH }}" $buildProps
       working-directory: .
     
-    - name: Build C++ DirectX project
-      run: |
-        msbuild "Source/Current/Windows API CodePack/Components/DirectX/DirectX.vcxproj" /p:Configuration=Release /p:Platform=${{ matrix.platform }} /p:PlatformToolset=v143 /verbosity:normal
-      working-directory: .
-    
     - name: Pack NuGet packages
       run: |
         dotnet pack "${{ env.SOLUTION_PATH }}" --configuration Release --platform ${{ matrix.platform }} --no-build --verbosity normal --output ./packages

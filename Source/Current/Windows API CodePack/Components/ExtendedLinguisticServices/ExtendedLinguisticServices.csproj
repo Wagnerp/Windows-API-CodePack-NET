@@ -16,23 +16,15 @@
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<Title>WindowsAPICodePackExtendedLinguisticServices</Title>
 
-		<Description>
-			This package contains the extended linguistic services binary for the Windows API Code Pack needed for Windows Forms Development in the 1.1 version, released by Microsoft in 2009.
-		</Description>
+		<Description>Windows Extended Linguistic Services (language detection, transliteration, and related mapping services) for desktop apps. Targets .NET Framework 4.6.2–4.8.1 and .NET 8–10 (Windows).</Description>
 
 		<PackageIcon>Windows.png</PackageIcon>
-
-		<RepositoryType>git</RepositoryType>
-
-		<RepositoryUrl>https://github.com/Wagnerp/Windows-API-CodePack-NET</RepositoryUrl>
 
 		<PackageLicenseFile>License.md</PackageLicenseFile>
 
 	<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
 
 	<PackageReadmeFile>Readme.md</PackageReadmeFile>
-
-	<Authors>$(Title)</Authors>
 
 		<PackageId>$(Title)</PackageId>
 
@@ -51,10 +43,6 @@
 		<Compile Remove="Content\**" />
 		<EmbeddedResource Remove="Content\**" />
 		<None Remove="Content\**" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<PackageReference Include="Microsoft.NETCore.Platforms" Version="7.0.4" />
 	</ItemGroup>
 
 	<ItemGroup>

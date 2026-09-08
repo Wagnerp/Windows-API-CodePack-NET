@@ -16,15 +16,9 @@
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<Title>WindowsAPICodePackSensors</Title>
 
-		<Description>
-			This package contains the sensors binary for the Windows API Code Pack needed for Windows Forms Development in the 1.1 version, released by Microsoft in 2009.
-		</Description>
-
-		<PackageProjectUrl>https://github.com/Wagnerp/Windows-API-CodePack-NET</PackageProjectUrl>
+		<Description>Windows Sensor Platform wrappers (ambient light, motion, and related sensor types) for desktop apps. Targets .NET Framework 4.6.2–4.8.1 and .NET 8–10 (Windows).</Description>
 
 		<PackageIcon>Windows.png</PackageIcon>
-
-		<RepositoryType>git</RepositoryType>
 
 		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
 
@@ -44,10 +38,6 @@
 
 		<BaseOutputPath>..\..\..\..\..\Output\bin</BaseOutputPath>
 	</PropertyGroup>
-
-	<ItemGroup>
-		<PackageReference Include="Microsoft.NETCore.Platforms" Version="7.0.4" />
-	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\Core\Core.csproj" />

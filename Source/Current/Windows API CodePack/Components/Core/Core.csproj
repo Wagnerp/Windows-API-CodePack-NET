@@ -16,7 +16,7 @@
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<Title>WindowsAPICodePackCore</Title>
 
-		<Description>This package contains the core binary for the Windows API Code Pack needed for Windows Forms Development in the 1.1 version, released by Microsoft in 2009.</Description>
+		<Description>Core Windows API Code Pack types: Task Dialogs, power management, network list, application restart/recovery, and property-system primitives. Targets .NET Framework 4.6.2–4.8.1 and .NET 8–10 (Windows).</Description>
 
 		<PackageLicenseFile>License.md</PackageLicenseFile>
 
@@ -25,12 +25,6 @@
 	<PackageReadmeFile>Readme.md</PackageReadmeFile>
 
 	<PackageIcon>Windows.png</PackageIcon>
-
-		<PackageProjectUrl>https://github.com/Wagnerp/Windows-API-CodePack-NET</PackageProjectUrl>
-
-		<RepositoryUrl>git</RepositoryUrl>
-
-		<Authors>$(Title)</Authors>
 
 		<PackageId>$(Title)</PackageId>
 
@@ -44,10 +38,6 @@
 
 		<BaseOutputPath>..\..\..\..\..\Output\bin</BaseOutputPath>
 	</PropertyGroup>
-
-	<ItemGroup>
-		<PackageReference Include="Microsoft.NETCore.Platforms" Version="7.0.4" />
-	</ItemGroup>
 
 	<ItemGroup>
 		<Compile Update="Resources\LocalizedMessages.Designer.cs">

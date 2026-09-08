@@ -1,18 +1,16 @@
 # Security Policy
 
-## Supported Versions
+## Supported versions
 
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
+| Version | Supported |
+|---------|-----------|
+| 8.0.x   | Yes       |
+| Earlier | No        |
 
-| Version | Supported          |
-| ------- | ------------------ |
-| 8.0.x   | :white_check_mark: |
+Security fixes are released on the current 8.0.x NuGet line.
 
-## Reporting a Vulnerability
+## Reporting a vulnerability
 
-Use this section to tell people how to report a vulnerability.
+Please use [GitHub Security Advisories](https://github.com/Wagnerp/Windows-API-CodePack-NET/security/advisories/new) for this repository. Do not open a public issue for unreleased vulnerabilities.
 
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+You should receive an acknowledgement within a few days. If the report is accepted, a fix will be targeted for the next patch release when practical. If it is declined, we will explain why.

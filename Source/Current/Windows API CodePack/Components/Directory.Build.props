@@ -12,6 +12,12 @@
 
 	<PropertyGroup>
 		<Version>$(LibraryVersion)</Version>
+		<Authors>Peter William Wagner</Authors>
+		<Copyright>Copyright (c) Microsoft Corporation. Modifications copyright (c) Peter William Wagner.</Copyright>
+		<PackageProjectUrl>https://github.com/Wagnerp/Windows-API-CodePack-NET</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/Wagnerp/Windows-API-CodePack-NET</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageTags>windows;api;shell;taskdialog;winforms;wpf;win10;win11;sensors;explorer</PackageTags>
 	</PropertyGroup>
 
 	<ItemGroup>

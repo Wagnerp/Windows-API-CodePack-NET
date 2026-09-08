@@ -89,16 +89,10 @@ jobs:
           /p:InformationalVersion=${{ steps.set-version.outputs.full-version }}+${{ github.sha }}
       working-directory: .
     
-    - name: Build C++ DirectX project
-      run: |
-        msbuild "Source/Current/Windows API CodePack/Components/DirectX/DirectX.vcxproj" /p:Configuration=${{ matrix.configuration }} /p:Platform=${{ matrix.platform }} /p:PlatformToolset=v143 /verbosity:normal
-      working-directory: .
-    
-    - name: Run tests (if any)
+    - name: Run tests
       run: |
         dotnet test "${{ env.SOLUTION_PATH }}" --configuration ${{ matrix.configuration }} --platform ${{ matrix.platform }} --no-build --verbosity normal --logger trx --results-directory TestResults
       working-directory: .
-      continue-on-error: true
     
     - name: Upload test results
       uses: actions/upload-artifact@v4
@@ -149,9 +143,9 @@ jobs:
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
     
-    - name: Validate NuGet packages
+    - name: Restore and pack NuGet packages
       run: |
-        dotnet pack "${{ env.SOLUTION_PATH }}" --configuration Release --no-build --verbosity normal --output ./packages
+        dotnet pack "${{ env.SOLUTION_PATH }}" --configuration Release --verbosity normal --output ./packages
       working-directory: .
     
     - name: Validate package contents

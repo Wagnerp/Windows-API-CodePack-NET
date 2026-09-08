@@ -25,12 +25,6 @@
 
 		<PackageIcon>Windows.png</PackageIcon>
 
-		<PackageProjectUrl>https://github.com/Wagnerp/Windows-API-CodePack-NET</PackageProjectUrl>
-
-		<RepositoryUrl>git</RepositoryUrl>
-
-		<Authors>$(Title)</Authors>
-
 		<PackageId>$(Title)</PackageId>
 
 		<SignAssembly>True</SignAssembly>
